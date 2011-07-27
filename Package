@@ -1,0 +1,9 @@
+echo "Making tags files"
+make tags
+echo "Backing up previous shar files, if any"
+[ -f endo.shar ] && mv endo.shar backups/endo.shar-
+[ -f params2.shar ] && mv params2.shar backups/params2.shar-
+echo "Creating new shar file"
+shar COPYING README Imakefile Makefile.std Package *.c *.h endo.LOCAL endo.man tags testit > endo.shar
+shar params/Misc/* params/Mandel/* params/Marty/* params/Lorenz/* > params2.shar
+echo "Done"

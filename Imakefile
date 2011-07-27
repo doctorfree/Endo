@@ -1,0 +1,32 @@
+XCOMM
+XCOMM	Imakefile for endo, by Ron Record
+XCOMM
+        DEPLIBS = $(DEPXLIB)
+XCOMM		 BINDIR = /usr/local/bin
+XCOMM         MANDIR = /usr/local/man/man1
+  ENDO_INST_DIR = $(DESTDIR)/usr/local/mathrec/endo
+      MANSUFFIX = 1
+XCOMM	Comment out the following line if you don't want the Plendo maps
+          PLENDO = -DPlendo
+XCOMM	Uncomment the following line if you want the Chichilnisky map
+XCOMM          NORTH = -DNorthSouth
+XCOMM	Uncomment the following line if you want the Gardini maps
+XCOMM           GARD = -DGardini
+XCOMM	Uncomment the following line if your system doesn't support prototypes 
+XCOMM         PROTO = -D_NO_PROTO
+        DEFINES = $(PLENDO) $(NORTH) $(GARD) $(PROTO) $(FONT)
+       INCLUDES = -I. -I../libXrr
+LOCAL_LIBRARIES = ../libXrr/libXrr.a $(XLIB)
+  SYS_LIBRARIES = -lm $(NAPLIB)
+           SRCS = event.c draw.c help.c info.c file.c frame.c init.c \
+          	  keyboard.c main.c maps.c mem.c misc.c comp.c cmplx.c \
+          	  parseargs.c print.c re.c rubber.c north.c
+           OBJS = event.o draw.o help.o info.o file.o frame.o init.o \
+		  keyboard.o main.o maps.o mem.o misc.o comp.o cmplx.o \
+		  parseargs.o print.o re.o rubber.o north.o
+
+ComplexProgramTarget(endo)
+
+install:: install.man
+	@if [ ! -d $(ENDO_INST_DIR) ]; then mkdir -p $(ENDO_INST_DIR); fi
+	@cp -r params $(ENDO_INST_DIR)

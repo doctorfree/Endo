@@ -1,0 +1,47 @@
+# Untested. Use the Imakefile.
+#
+CC = cc 
+#DEBUG =  -g
+##
+## Compiler Defines
+## 
+DEFINES = -DMAPS -DNorthSouth -DGardini -DSML_FONT
+
+CFLAGS = $(DEBUG) $(DEFINES) -I/usr/include/X11
+##
+## Libraries
+## X11 	X11 graphics library
+##
+##
+LIBS 	= 	-lX11 -lm
+SRCS = event.c draw.c help.c info.c file.c frame.c hls2rgb.c init.c \
+          	  keyboard.c main.c maps.c mem.c misc.c comp.c cmplx.c \
+          	  parseargs.c print.c re.c rubber.c north.c
+OBJS = event.o draw.o help.o info.o file.o frame.o hls2rgb.o init.o \
+		  keyboard.o main.o maps.o mem.o misc.o comp.o cmplx.o \
+		  parseargs.o print.o re.o rubber.o north.o
+
+.o:.c
+
+all: endo endo.LOCAL
+
+cp install:	all
+	-mkdir -p $(ROOT)/usr/local/bin/X11
+	cp endo $(ROOT)/usr/local/bin/X11/endo
+	-mkdir -p $(ROOT)/usr/man/cat.LOCAL
+	cp endo.LOCAL $(ROOT)/usr/man/cat.LOCAL/endo.LOCAL
+	-mkdir -p $(ROOT)/usr/local/lib/endo/pics
+	(cd params; find . -depth -print | cpio -pdlmv $(ROOT)/usr/local/lib/endo)
+	cp pics/* $(ROOT)/usr/local/lib/endo/pics
+
+clean:
+	rm -f *.o
+
+clobber:	clean
+	rm -f endo
+
+endo : $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
+
+endo.LOCAL:	endo.man
+	nroff -man endo.man > endo.LOCAL

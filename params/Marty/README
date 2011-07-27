@@ -1,0 +1,20 @@
+
+	28 Nov 1992	rr@sco.com
+
+	These parameters and the equations they are used in were taken 
+	from the book "Symmetry In Chaos" by Michael Field and Martin 
+	Golubitsky. When invoked with no arguments, each shell script 
+	will produce a histogram of trajectories for the map which, if
+	let run long  enough, will resemble the corresponding figure from
+	the book. 
+
+	If you invoke any of these scripts with the arguments :
+		"-S 0 -n 2 -P 1 -p"
+	then you should get a window displaying the critical curves and
+	their first couple of iterates. For these maps,  these critical
+	curves (where the Jacobian vanishes) usually look pretty cool.
+
+	If you invoke a  script with the arguments :
+		"-S 0 -p"
+	then you will see the rate of attraction displayed in a window.
+

@@ -1,0 +1,111 @@
+#! /bin/sh
+# Test harness for endomorphisms of the plane program
+
+S=4
+D=8
+W=128
+H=120
+V=$1
+
+[ "$V" = "demo" ] && {
+	S=40
+	D=80
+	W=350
+	H=300
+}
+
+[ "$V" = "vista" ] &&
+	echo "vista:hits 1.3" >> hits
+
+# testing function
+test_case() 
+{
+
+    [ "$V" = "vista" ] && echo partition "$1" >> hits
+
+    if [ "$V" = "demo" ] ; then
+        $1
+    else
+        $1 > /dev/null 2>&1
+    fi
+    if [ $? = 0 ] ; then
+	[ "$V" = "demo" ] || echo $1 : PASS
+    else
+	[ "$V" = "demo" ] || echo $1 : FAIL
+    fi
+}
+
+[ "$V" = "demo" ] || {
+	echo ""
+	echo "	Running Suite of Test Cases for Endo"
+	echo ""
+}
+
+[ "$V" = "demo" ] || {
+	echo "Usage message should report as test FAIL"
+	test_case "./endo -u -0 -S $S -n $D -W $W -H $H"
+	echo ""
+}
+
+test_case "./endo -0 -n $D -W $W -H $H"
+test_case "./endo -0 -T 1 -n $D -W $W -H $H -z 0.001"
+test_case "./endo -0 -T 2 -n $D -W $W -H $H"
+test_case "./endo -0 -T 3 -n $D -W $W -H $H"
+test_case "./endo -0 -T 4 -n $D -W $W -H $H"
+test_case "./endo -0 -T 5 -n $D -W $W -H $H"
+test_case "./endo -0 -T 6 -n $D -W $W -H $H"
+test_case "./endo -0 -T 7 -n $D -W $W -H $H"
+test_case "./endo -0 -T 8 -n $D -W $W -H $H"
+test_case "./endo -0 -T 9 -n $D -W $W -H $H"
+test_case "./endo -0 -T 10 -n $D -W $W -H $H"
+test_case "./endo -0 -T 11 -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 1 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 2 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 3 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 4 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 5 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 6 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 7 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 8 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 9 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 10 -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 11 -p -P -S $S -n $D -W $W -H $H"
+test_case "./endo -0 -Q 0 1 -T 12 -p -P -S $S -n $D -W $W -H $H"
+[ "$2" = "all" ] && {
+	test_case ".endo -A 0.04 -B 0.056 -C 0.0416 -D 0.6336 -E 10 -F 0.25 -G 20 -I 0.25 -J 20 -K 0.25 -L 10 -M 0.25 -x -40 -y -80 -w 160 -h 320"
+	test_case ".endo -n $D -W $W -H $H -T 11"
+	test_case ".endo -A 0.04 -B 0.056 -C 0.0416 -D 0.6336 -E 10 -F 0.25 -G 20 -I 0.25 -J 20 -K 0.25 -L 10 -M 0.25 -w 40 -h 80"
+	test_case ".endo -S $S -n $D -Q 0 3 -x 0 -w 0.1 -B 0.056 -y 0.0 -h 1.0 -C 0.0416 -E 10 -F 0.25 -G 20 -I 0.25 -J 20 -K 0.25 -L 10 -M 0.25"
+	test_case ".endo -T 2 -S $S -n $D -p -Q 0 1 -x 1.4 , 0.0 -y 0.35 , 0.0 -w 28.0 , 382.0 -h 8.0 , 325.0 -W $W -H $H"
+	test_case ".endo -m 1 -A 0.6 -B 1.1 -C 0.9 -D 1.0 -E 0.0"
+	test_case ".endo -m 1 -A 0.6 -B 1.1 -C 0.9 -D 1.0 -E -2.5"
+	test_case ".endo -T 7 -p -k 10 -K 20 -E 0.1 -D 0.1 -L 2.2 -Q 21 22 -S $S -n $D -x 1.0 -y 1.0 -w 20.0 -h 10.0"
+	test_case ".endo -T 7 -p -k 10 -K 20 -E 0.1 -D 0.1 -l 2.2 -L 2.2 -n $D"
+	test_case ".endo -A 2.5 -D 0.8"
+	test_case ".endo -T 7 -p -k 9 -K 20 -E 0.1 -D 0.1 -l 2.2 -L 2.2 -n $D -z 0.02"
+	test_case ".endo -T 7 -p -k 10 -K 20 -E 0.1 -D 0.1 -Q 10 22 -S $S -n $D -x 2.1 -y 2.1 -w 2.1 -h 2.1"
+	test_case ".endo -Q 8 10 -T 5 -S $S -n $D -W $W -H $H"
+	test_case ".endo -T 7 -k 10 -K 20 -E 0.1 -D 0.1 -l 2.2 -L 2.8 -S $S -n $D -p -Q 0 1 -y 0.01 -h 0.1"
+	test_case ".endo -T 7 -k 10 -K 20 -E 0.1 -D 0.1 -l 2.2 -L 2.7 -S $S -n $D -p -Q 0 1 -y 0.03 -h 0.03"
+	test_case ".endo -T 7 -k 10 -K 20 -E 0.1 -D 0.1 -a 0.8 -b 0.05 -S $S -n $D -p -Q 10 22 -x 2.0 -y 2.0 -w 4.0 -h 4.0"
+	test_case ".endo -T 7 -k 10 -K 20 -E 0.1 -D 0.1 -a 0.8 -b 0.05 -S $S -n $D -p -Q 10 22 -x 2.1 -y 1.7 -w 2.0 -h 2.0"
+	test_case ".endo -T 7 -E 0.1 -D 0.1 -S $S -n $D -p -Q 22 10 -x -10.0 -y -3.0 -w 1.0 -h 1.0"
+	test_case ".endo -T 7 -k 10 -K 20 -E 0.1 -D 0.1 -a 0.8 -b 0.05 -S $S -n $D -p -Q 9 21 -x 12.0 -y 9.0 -w 7.9 -h 4.5 -l 2.2 -L 2.2"
+	test_case ".endo -T 7 -S $S -n $D -p -Q 10 22 -x -2.4 , 59.0 -y -10.0 , 26.0 -w 0.3 , 2.0 -h 0.5 , 70.0 -W $W -H $H"
+	test_case ".endo -2 -T 11 -S $S -n $D -Q 0 1 -x 6.0 , -1.617188 -w 6.0 , 3.328126 -y 2.0 , -1.597656 -h 6.0 , 5.478515 -p -P -W $W -H $H"
+	test_case ".endo -Q 0 1 -S $S -n $D -T 11 -x 5.8 , -1.475 -w 20.0 , 2.984375 -y 1.8 , -1.509375 -h 3.0 , 4.25 -W $W -H $H -p -P"
+}
+
+[ "$V" = "demo" ] || {
+	echo ""
+	echo "Map index too high should report as test FAIL"
+	test_case "./endo -0 -T 15 -S $S -n $D -W $W -H $H"
+	echo ""
+	echo "	Test Cases Complete "
+	echo ""
+}
+
+[ "$V" = "vista" ] &&
+	echo "  Run ViSTA Reports MetGen, AudGen & CovGen"
+echo ""

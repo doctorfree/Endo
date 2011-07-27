@@ -1,0 +1,4 @@
+:
+# this one has  all kinds of loops in  it
+# ../../../endo -T 19 -8 0 -A -2.3 -B 4.4 -C 1.75 -D -0.4 -E 0.6 -F 5
+endo -T 19 -7 -8 0 -A -2.6 -B 4.4 -C 1.75 -D -0.4 -E 0.6 -F 5 $*

@@ -1,0 +1,477 @@
+.TH ENDO LOCAL
+.SH NAME
+endo \- display an iterated endomorphism of the plane
+.SH SYNOPSIS
+.in +8n
+.ti -8n
+\fIendo\fR
+[-^+01234567RUVZpquv][-S settle][-n dwell][-W width][-H height][-o filename]
+[-8 0-3][-9 0-3][-P 1-8][-abcdefgijklm
+\fIr\fR ][-ABCDEFGIJKLM 
+\fIr\fR ][-w
+\fIr\fR [ ,
+\fIr\fR ,
+\fIr\fR ][-h 
+\fIr\fR [ ,
+\fIr\fR ,
+\fIr\fR ][-x
+\fIr\fR [ ,
+\fIr\fR ,
+\fIr\fR ][-y 
+\fIr\fR [ ,
+\fIr\fR ,
+\fIr\fR ][-t delta][-z cdelta][-N 
+\fIn\fR ][-O 
+\fIn\fR ][-X 
+\fIn\fR ][-Y 
+\fIn\fR ][-Q 
+\fIn n\fR [ ,
+\fIn\fR ][-T 
+\fIn\fR ][-r 
+\fIn\fR ][-s 
+\fIn\fR ]
+.in -8n
+.SH DESCRIPTION
+\fIendo\fR
+generates and graphically displays an iterated endomorphism of the plane.
+Endomorphisms are
+\fIinto\fR mappings. Thus, each iterate (f(x,y),g(x,y)) may not have a unique
+inverse, (x,y).
+The basic idea is to iterate an endomorphism of the plane (R x R).
+Each point (x,y) is mapped to (f(x,y),g(x,y)). The new point is
+then mapped to (f(f(x,y),g(x,y)),g(f(x,y),g(x,y))) and so on. Each
+point is then colored according to how many iterates it took to get
+within some "delta" of a previous iterate (e.g. a periodic orbit is
+detected). Lyapunov exponents for a region of parameter space can be 
+calculated and displayed in a separate window. Phase portraits can be 
+constructed and histographic data displayed in a third window.
+Critical curves (curves for which the determinant of the Jacobian is zero)
+and their iterates may be displayed in a fourth window. Finally, pre-iterates
+of the critical curves may be displayed in a fifth window. By varying 
+parameter(s), the phase portrait window can be used to display bifurcation
+diagrams. The "attract velocity" window can also be used to display basins
+of attraction. A variety of methods of display and colormaps can be selected. 
+For instance, bifurcation diagrams can be displayed in 3 dimensions (2 spatial 
+and one parametric), 2 spatial dimensions, 1 spatial and 1 parametric 
+dimension, or 2 dimensional with the 2 spatial dimensions overlayed on the 
+y-axis while the parametric dimension is mapped onto the x-axis. In each case, 
+the user can select whether to clear the window each time a parameter is 
+incremented.
+.SH OPTIONS
+.TP 8
+-^
+reverses the colormap divisions (e.g. negative Lyapunov exponents are given
+the portion of the colormap usually reserved for positive Lyapunov exponents).
+.TP
+-+
+indicates display coordinate axes.
+.TP
+-0
+selects the demonstration mode.
+.TP
+-1
+display y coordinate bifurcation diagram only
+.TP
+-2
+display x and y coordinate bifurcation diagrams
+.TP
+-3
+display 3-D bifurcation diagrams
+.TP
+-4
+display x coordinate bifurcation diagram only
+.TP
+-6
+selects animation drawing mode (i think bifurcation diagrams look best this way)
+.TP
+-7
+selects histogram drawing mode
+.TP
+-8 \fIn\fP
+selects Lyapunov mode (0 indicates no Lyapunov sets calculated or displayed,
+1 indicates display only bifurcation diagrams, 2 indicates calculate and 
+display both bifurcation diagrams and Lyapunov exponents, 3 is the same as 2 
+but the subsequent initial condition is chosen to be the last point calculated).
+.TP
+-9 \fIn\fP
+selects Mandelbrot mode (0 indicates no Mandelbrot/Julia sets calculated or 
+displayed, 1 indicates display Mandelbrot sets with Lyapunov exponents, 2 
+indicates calculate and display Mandelbrot set in black, 3 indicates display 
+Mandelbrot set using rate of attraction of critical point).
+.TP
+-n \fIn\fP
+Specifies the "dwell" or number of iterations over which to calculate and
+display iterate values.
+.TP
+-S \fIn\fP
+Specifies the "settle" or number of iterations prior to the beginning of
+the calculation of exponents or display of the iterates.
+.TP
+-H \fIn\fP
+Specifies the height of the window.
+.TP
+-ABCDEFGIJKLM \fIn\fP
+Specifies the 12 possible parameter values for the selected map. For instance,
+"-A 0.04 -B 0.056" would select values for the first and second parameters of
+the map.
+.TP
+-abcdefgijklm \fIn\fP
+Specifies the 12 possible additional parameter values for the North-South
+models. These values are those to be used for the North region.
+.TP
+-O \fIn\fP
+Specifies the minimum color index to be used for positive exponents
+.TP
+-W \fIn\fP
+Specifies the width of the window.
+.TP
+-x \fIr [ , r , r ]\fP
+Specifies the real value to use as the minimum value of the 
+horizontal axis. First value is for the Attractor/Lyapunov window. Second
+(optional) value is for the Trajectory window. Third (optional) value is
+for the Critical Curve window. Values are a comma-separated list.
+.TP
+-y \fIr [ , r , r ]\fP
+Specifies the real value to use as the minimum value of the 
+vertical axis. First value is for the Attractor/Lyapunov window. Second
+(optional) value is for the Trajectory window. Third (optional) value is
+for the Critical Curve window. Values are a comma-separated list.
+.TP
+-P \fIn\fP
+Turns on critical curve detection and display. 1 indicates display of 
+critical curves only, 2 indicates display of critical and precritical curves, 
+3 indicates display of precritical curves only, 4 indicates display of 
+pre-images of the diagonal only, 5 indicates the attractors are symmetrically
+divided by the diagonal, 6 indicates display of pre-images of the origin,
+7 indicates display of pre-images of the diagonal with the pre-iterates of
+the origin colored differently, 8 indicates display of pre-iterates of the 
+critical curve and the origin with the pre-iterates of the origin colored
+differently.
+.TP
+-h \fIr [ , r , r ]\fP
+Specifies the real value to be used as the range over which the vertical
+axes values vary. First value is for the Attractor/Lyapunov window. Second
+(optional) value is for the Trajectory window. Third (optional) value is
+for the Critical Curve window. Values are a comma-separated list.
+.TP
+-R
+Turns on selection of random initial conditions. A new initial condition is
+selected for each horizontal slice through parameter space when calculating
+Lyapunov exponents.
+.TP
+-U \fIr\fP
+Specifies the real value to be used as the minimum x-axis of the trajectory
+window.
+.TP
+-Q \fIn n [ , n ]\fP
+Specifies which parameter indices to vary during calculation of Lyapunov
+exponents. For instance, "-Q 0 2" varies parameters A and C while
+calculating Lyapunov exponents for each pair of parameter values. The third
+(optional) value specifies the method of traversing parameter space when
+constructing bifurcation diagrams. By default, parameters A and B are varied
+and the parameter region is 
+traversed row by row. A value of 1 indicates to just compute the diagonal.
+A value of 2 computes a row then a column. A value of 3 computes a column
+then a row. A value of 4 says use a mesh and refine it until all values
+are calculated.
+.TP
+-T \fIn\fP
+Selects between available non-linear maps of the plane. A value of
+0 specifies the Gaertner map; a value of 1, the Goodwin map; a value of 2,
+the Guckenheimer map; a value of 3, the "double circle" map; a value of 4, 
+the "double sine hump" map; a value of 5 selects a variant of the double
+circle map, while a value of 6 selects the Standard map. Values of 7-9
+select the either the Chichilnisky North-South models or the Gardini figures
+depending on how the program was compiled, 10 selects the "rotor" map,
+11 the "twist and flip" map, 12 the "Dorband double logistic" map, 13 the
+untwisted double logistic, 14 the Lorenz map, 15 the Volterra-Lotka
+equations, 16 the familiar Julia and Mandelbrot sets, and 17 the Brusselator.
+There is no default map. If none is specified, a menu is displayed to
+select from.
+.TP
+-X \fIr\fP
+Specifies the real value to be used as the initial x value of the trajectory.
+.TP
+-Y \fIr\fP
+Specifies the real value to be used as the initial y value of the trajectory.
+.TP
+-Z \fIr\fP
+Specifies the real value to be used as the minimum y-axis of the trajectory
+window.
+.TP
+-o \fIfilename\fP
+Specifies the output filename to be used. If the -o option is given, this
+file will automatically be written out at the completion of the drawing.
+If it is not specified, a default filename of endo.out is used and only
+written if the 'F', 'T' or 'V' keys are pressed during a run. The 'F' key
+will output the Attractor/Lyapunov window, the 'T' key will output the
+Trajectory window, and the 'V' key will output the Critical Curve window.
+The format of the
+output file is PPM for color and PGM for monochrom. The parameters used to
+calculate the picture are included as comments at the beginning of the output
+file.
+.TP
+-p
+Turns off calculation and display of phase portrait and bifurcation diagrams.
+.TP
+-r \fIn\fP
+Specifies the maximum rgb value to be used. Default is 35000.
+.TP
+-s \fIn\fP
+Specifies the length of the color wheel spin.
+.TP
+-u
+Produces a usage message.
+.TP
+-v 
+Prints out the various values to be used and exits.
+.TP
+-w \fIr [ , r , r ]\fP
+Specifies the real value to be used as the range over which the horizontal
+values vary. First value is for the Attractor/Lyapunov window. Second
+(optional) value is for the Trajectory window. Third (optional) value is
+for the Critical Curve window. Values are a comma-separated list.
+.TP
+-t \fIr\fP
+Specifies the real value to be used as the radius within which periodicity
+is decided (e.g. the distance between the current and a previous iterate
+is less than r).
+.TP
+-q
+Turns on attractor display (only useful when also detecting periodic orbits).
+.TP
+-z \fIr\fP
+Specifies the real absolute value to be used as the threshold within which
+points are determined to be on the critical curve (e.g. the determinant of
+the Jacobian at that point is less than abs(r)).
+.sp 2
+.SH NOTES
+.sp
+During display, 
+\fIendo\fR
+allows interaction through either the keyboard or the mouse. In most of the
+windows, pressing the left mouse button allows you to select the area to
+be investigated with the mouse. The upper left hand corner of the desired
+area is the location of the cursor when the button is pressed. The lower
+right hand corner is specified by the cursor when the button is released.
+During 3-D display, pressing the middle mouse button will display the angle
+values through which the viewpoint will be rotated. Releasing the middle 
+mouse button will rotate the viewpoint. Pressing the right mouse button will
+cause the viewpoint to be translated as the mouse is moved while the button
+is down.
+.sp
+The color map adjustment window allows you to alter the color mapping function
+by use of the mouse or keyboard. In this window, pressing the left mouse 
+button selects the point at which the line segments of the map will intersect.
+By holding the button down and moving the mouse you can drag this point around.
+Releasing the mouse button selects the point. Leaving the window aborts the
+adjustment. In this window, the middle mouse button selects a linear mapping
+and the right mouse button displays a histogram of color usage.
+.sp
+No mouse interaction is possible in the help or information windows.
+.sp 2
+Use of the keys
+.sp
+\fI012356789<>[]{}-+^%,./|aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUVwWxXyYzZ?\fP
+.sp
+indicates:
+.sp
+.ti 10
+(0) Zoom out, quadrupling size of selected window.
+.ti 10
+(1) Use 1-D model (only appropriate for Chichilnisky model 1).
+.ti 10
+(2) Select one of several styles of bifurcation diagrams.
+.ti 10
+(3) Toggle 3-D display.
+.ti 10
+(5) Pan left by half the width.
+.ti 10
+(6) Pan right by half the width.
+.ti 10
+(7) Pan down by half the height.
+.ti 10
+(8) Pan up by half the height.
+.ti 10
+(9) Zoom in to center quarter of selected window.
+.ti 10
+(<) Halve dwell value.
+.ti 10
+(>) Double dwell value.
+.ti 10
+([) Halve settle value.
+.ti 10
+(]) Double settle value.
+.ti 10
+({) Halve delta value.
+.ti 10
+(}) Double delta value.
+.ti 10
+(-) Halve cdelta value.
+.ti 10
+(+) Double cdelta value.
+.ti 10
+(,) Positions the viewpoint on the y-axis.
+.ti 10
+(.) Positions the viewpoint on the z-axis.
+.ti 10
+(/) Positions the viewpoint on the x-axis.
+.ti 10
+(|) Toggles display of coordinate axes.
+.ti 10
+(A) Displays the next iterate of the selected critical arc.
+.ti 10
+(a) Toggle the attractor calculation and display.
+.ti 10
+(b or B) Toggle the display of the rate of attraction window.
+.ti 10
+(c) Clear the trajectory popup window
+.ti 10
+(C) Toggles calculation and display of the critical curves
+.ti 10
+(d) Go down to the next window in the zoom sequence.
+.ti 10
+(D) Flush the drawing buffers.
+.ti 10
+(E or e) Recalculate the indices into the color wheel using a different method
+.ti 10
+(f) Toggles periodic orbit detection
+.ti 10
+(F) Save current attract velocity window to ouput file
+.ti 10
+(G) Recalculate and redisplay the iterates of the critical curve
+.ti 10
+(g) Calculate and display the iterates of the selected critical arc
+.ti 10
+(H) Toggles calculation and display of a histogram of trajectory values
+.ti 10
+(h or ?) Display brief help message
+.ti 10
+(I) Toggle display of a parameter and map information window.
+.ti 10
+(i) Toggle random initial condition selection.
+.ti 10
+(j) Toggle clearing of bifurcation diagram at each new vertical parameter value.
+.ti 10
+(k) Translate the viewpoint half the distance toward the view center.
+.ti 10
+(K) Translate the viewpoint double the distance from the view center.
+.ti 10
+(l or L) Toggle Lyapunov exponent calculation and display.
+.ti 10
+(m) Increment the map index, selecting the next available map to iterate.
+.ti 10
+(M) Decrement the map index, selecting the previous map to iterate.
+.ti 10
+(n) Toggle negative/positive Lyapunov exponent color maps.
+.ti 10
+(o) Translate the viewpoint toward the already computed average of points.
+.ti 10
+(O) Translate the viewpoint away from the already computed average of points.
+.ti 10
+(P or p) Toggle the point orbit calculation and display.
+.ti 10
+(r) Redraw the window using previously calculated rates of attraction.
+.ti 10
+(R) Redraw the window using the newly set dwell and/or settle values.
+.ti 10
+(s) Spin the color wheel.
+.ti 10
+(S) Display the menu of available maps for selection.
+.ti 10
+(T) Save current point trajectory window to ouput file.
+.ti 10
+(t) Select alternate critical arc (if any).
+.ti 10
+(u) Go up to the window just prior to the most recent zoom.
+.ti 10
+(U) Go all the way up to the original window.
+.ti 10
+(V) Save current critical curve window to ouput file
+.ti 10
+(W) Use next color map.
+.ti 10
+(w) Use previous color map.
+.ti 10
+(x) Clear the rate of attraction window
+.ti 10
+(X) Delete this frame from the sequence
+.ti 10
+(z) Clear the critical curve window
+.ti 10
+(Z) Single step display of each iterate of the critical curve
+.ti 10
+(Q or q) quit
+.sp 2
+In addition, several control keys are supported.
+.sp
+.ti 10
+<ctrl>-S will pause computation, <ctrl>-Q will resume computation
+.sp
+<ctrl>-C will toggle drawing the trajectory in the critical curve window.
+.sp
+<ctrl>-A toggles between adjusting the sea level and sky level (minimum and
+maximum bounds for histographic data)
+.sp
+<ctrl>-B toggles a color bar display. This bar indicates the color indices
+used for histographic images.
+.sp
+<ctrl>-E recalulates colors for basins of attraction
+.sp
+<ctrl>-F sets the sea or sky level to 1.0
+.sp
+<ctrl>-G sets the sea or sky level to 0.0
+.sp
+<ctrl>-H decrements the sea or sky level
+.sp
+<ctrl>-J increments the sea or sky level
+.sp
+<ctrl>-K decrements the histogram algorithm index
+.sp
+<ctrl>-L increments the histogram algorithm index
+.sp
+<ctrl>-M halves the number of iterates of the critical curve to be displayed
+.sp
+<ctrl>-N doubles the number of iterates of the critical curve to be displayed
+.sp
+<ctrl>-T toggles display of the trajectory in the pre-critical window
+.sp
+<ctrl>-P toggles display of the trajectory in the basin window
+.sp
+<ctrl>-V toggles display of the color mapping adjustment window
+.sp
+<ctrl>-W reads a colormap from the file specified by the Mapfile resource or,
+if no such resource exists, $HOME/.endomap . The format of this file is 3 
+integers per line, each in the range [0, 256] indicating red, green and blue 
+values.
+.sp
+<ctrl>-X decreases the number of divisions in the multiple rainbow palette
+.sp
+<ctrl>-Y increases the number of divisions in the multiple rainbow palette
+.sp 2
+.SH AUTHORS
+.ce 13
+Ronald Joe Record
+rr@ronrecord.com
+
+and
+
+Dr. Ralph H. Abraham
+Mathematics Department
+University of California
+Santa Cruz, CA 95064
+rha@cats.ucsc.edu
+.ce 0
+.sp 2
+.SH ACKNOWLEDGEMENTS
+.PP
+The series of seminars given in 1992 at UCSC led by Dr. Ralph Abraham were the
+inspiration for the study of iterated endomorphisms of the plane.
+Techniques for calculating the critical arcs and absorbing regions
+were drawn from Laura Gardini of the Istituto di Scienze economiche,
+Universita' di Urbino. Studies of various maps of the plane were used
+including papers by Jon von Neumann, Graciela Chichilnisky, John 
+Guckenheimer, G. Oster, A. Ipaktchi, Wulf Gaertner, Jochen Jungeilges,
+Ralph Abraham, B. P. Wood, A. J. Lichtenberg, Z. You, E.J. Kostelich,
+J. A. Yorke, R. Brown, L. Chua, K. Judd, A. I. Mees, K. Aihara, and
+M. Toyoda.

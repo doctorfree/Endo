@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>endo</TITLE>
+</HEAD>
+<BODY>
+<H1>endo</H1>
+<P>
+Calculate and graphically display an iterated endomorphism of the plane
+<DL>
+<DT><B>Authored and Contributed by</B>
+<DD>Ronald Joe Record
+<DT><B>Restrictions</B>
+<DD>Copyright 1993, 1994 Ronald Joe Record
+
+<DT><B>Description</B>
+<DD>
+The basic idea is to iterate an endomorphism of the plane (R x R).
+Each point (x,y) is mapped to (f(x,y),g(x,y)). The new point is
+then mapped to (f(f(x,y),g(x,y)),g(f(x,y),g(x,y))) and so on. Each
+point is then colored according to how many iterates it took to get
+within some "delta" of a previous iterate (e.g. a periodic orbit is
+detected). Lyapunov exponents can be calculated and displayed for a 
+region of parameter space. Phase portraits can be constructed and
+histographic data displayed. Finally, critical curves and their iterates
+may be displayed (curves for which the determinant of the Jacobian is zero).
+
+<DT><B>Acknowledgements</B>
+<DD>
+The Winter 1992 seminar at UCSC led by Dr. Ralph Abraham was the
+inspiration for the study of iterated endomorphisms of the plane.
+The 3-D transformation routines were ported to X from CGI routines
+developed by Hiram Clawson.
+<P>
+Techniques for calculating the critical arcs and absorbing regions
+were drawn from Laura Gardini of the Istituto di Scienze economiche,
+Universita' di Urbino. Studies of various maps of the plane were used
+including papers by Jon von Neumann, Graciela Chichilnisky, John 
+Guckenheimer, G. Oster, A. Ipaktchi, Wulf Gaertner, Jochen Jungeilges,
+Ralph Abraham, B. P. Wood, A. J. Lichtenberg, Z. You, E.J. Kostelich,
+J. A. Yorke, R. Brown, L. Chua, K. Judd, A. I. Mees, K. Aihara, and
+M. Toyoda.
+<P>
+Some "interesting" runs of endo are included as simple shell scripts in the
+"params" subdirectory (these get installed in /usr/local/mathrec/endo).
+
+<DT><B>Customizing</B>
+<DD>
+To add a map to the array of selectable endomorphisms, follow the following
+steps :
+<OL>
+	<LI> Edit endo.h and add the pair, double, PFP, PFD, and Mapnames
+	   declarations. Follow the example set by the "standard" map.
+	<LI> Edit maps.c and add the map and derivative function definitions.
+	   Again, you can follow the example set by standard() and dstandard().
+	<LI> Edit params.h adding the numerical values to use in the 
+	   amins, aranges, bmins, branges, pmins, pmaxs, and defparms arrays.
+	   In each case, when adding the nth map, you will be adding the nth
+	   value in the array (which may itself be an array).
+	<LI> Edit defines.h, incrementing NUMMAPS and increasing NUMDEFS by 2.
+	<LI> Edit info.c, adding a string representation of the function to
+	   Mapdefs[] and an entry in the numparams array indicating how many
+	   parameters the map has.
+	<LI> make clean; make tags; make
+</OL>
+
+<DT><B>Productivity</B>
+<DD>This program was designed to assist in the exploration and research of
+iterated non-invertable maps of the plane. It has proved useful in constructing
+a phenomenology of the dynamical properties of such maps.
+
+<DT><B>Safety</B>
+<DD>I have used it for years without harm.
+
+<DT><B>Work Planned</B>
+<DD>Improve the Lyapunov exponent algorithm so that both exponents are
+calculated explicitly.
+
+<DT><B>Documentation</B>
+<DD>manual page.
+
+<DT><B>Verification</B>
+<DD>Execute any or all of the shell scripts provided in /usr/local/mathrec/endo.
+
+</DL>
+</BODY>
+</HTML>

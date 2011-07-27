@@ -1,0 +1,78 @@
+Endo - iterate an endomorphism of the plane
+----
+
+Written by Ronald Joe Record (rr@ronrecord.com) 17 Jan 1992
+
+INTRO
+-----
+
+The basic idea is to iterate an endomorphism of the plane (R x R).
+Each point (x,y) is mapped to (f(x,y),g(x,y)). The new point is
+then mapped to (f(f(x,y),g(x,y)),g(f(x,y),g(x,y))) and so on. Each
+point is then colored according to how many iterates it took to get
+within some "delta" of a previous iterate (e.g. a periodic orbit is
+detected). Lyapunov exponents can be calculated and displayed for a 
+region of parameter space. Phase portraits can be constructed and
+histographic data displayed. Finally, critical curves and their iterates
+may be displayed (curves for which the determinant of the Jacobian is zero).
+
+ACKNOWLEDGEMENTS
+----------------
+
+The Winter 1992 seminar at UCSC led by Dr. Ralph Abraham was the
+inspiration for the study of iterated endomorphisms of the plane.
+
+Techniques for calculating the critical arcs and absorbing regions
+were drawn from Laura Gardini of the Istituto di Scienze economiche,
+Universita' di Urbino. Studies of various maps of the plane were used
+including papers by Jon von Neumann, Graciela Chichilnisky, John 
+Guckenheimer, G. Oster, A. Ipaktchi, Wulf Gaertner, Jochen Jungeilges,
+Ralph Abraham, B. P. Wood, A. J. Lichtenberg, Z. You, E.J. Kostelich,
+J. A. Yorke, R. Brown, L. Chua, K. Judd, A. I. Mees, K. Aihara, and
+M. Toyoda.
+
+BUILD
+-----
+
+To build the endo binary, either use the Imakefile or one of the sample 
+makefiles - Makefile.ODT or Makefile.OSF. Makefile.ODT is a sample makefile
+used to build endo on an SCO ODT system. Makefile.OSF was used as a makefile
+on a DECstation 3100 running OSF/1. The manual page can be formatted by typing 
+"nroff -man endo.man > endo.doc".
+
+INSTALL
+-------
+
+To install endo, copy the endo binary to the desired location (the sample
+makefiles put it in /usr/local/bin/X11).
+Copy the formatted man page to wherever you keep your local doc (i use
+/usr/man/man.LOCAL for imaging software), then add that location
+to your MANPATH.
+
+Some "interesting" runs of endo are included as simple shell scripts in the
+"params" subdirectory.
+
+
+CUSTOMIZING
+-----------
+
+To add a map to the array of selectable endomorphisms, follow the following
+steps :
+
+	1. Edit endo.h and add the pair, double, PFP, PFD, and Mapnames
+	   declarations. Follow the example set by the "standard" map.
+	2. Edit maps.c and add the map and derivative function definitions.
+	   Again, you can follow the example set by standard() and dstandard().
+	3. Edit params.h adding the numerical values to use in the 
+	   amins, aranges, bmins, branges, pmins, pmaxs, and defparms arrays.
+	   In each case, when adding the nth map, you will be adding the nth
+	   value in the array (which may itself be an array).
+	4. Edit defines.h, incrementing NUMMAPS and increasing NUMDEFS by 2.
+	5. Edit info.c, adding a string representation of the function to
+	   Mapdefs[] and an entry in the numparams array indicating how many
+	   parameters the map has.
+	6. make clean; make tags; make
+
+Ideas, comments, additions, deletions, suggestions, bug reports, code review,...
+e-mail Ronald Record at rr@ronrecord.com
+
